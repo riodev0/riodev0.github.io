@@ -1,6 +1,6 @@
 // Game configuration
 const config = {
-    initialBalance: 1000,
+    initialBalance: 10000,
     blackjackPayout: 1.5, // 3:2 payout
     standardPayout: 1,
     dealerStandThreshold: 17
