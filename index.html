@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0a5c36;
+            color: white;
+            padding: 20px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0d723b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .hand {
+            min-height: 120px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #1a7a4a;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .card {
+            width: 80px;
+            height: 120px;
+            background-color: white;
+            border-radius: 5px;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .card.hearts, .card.diamonds {
+            color: red;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            background-color: #f8c537;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #e0b431;
+        }
+        h1 {
+            color: #f8c537;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Blackjack</h1>
+        
+        <div class="buttons">
+            <button id="start-btn">New Game</button>
+            <button id="hit-btn">Hit</button>
+            <button id="stand-btn">Stand</button>
+        </div>
+        
+        <h2>Dealer's Hand</h2>
+        <div id="dealer" class="hand"></div>
+        
+        <h2>Your Hand</h2>
+        <div id="player" class="hand"></div>
+    </div>
+
+    <script src="bj.js"></script>
+    <script>
+        // Additional game logic to handle UI updates
+        function displayCard(card, element) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = `card ${card.suit}`;
+            cardDiv.textContent = card.value;
+            element.appendChild(cardDiv);
+        }
+
+        document.getElementById("hit-btn").addEventListener("click", function() {
+            const card = dealCard("player");
+            if (card) {
+                displayCard(card, document.getElementById("player"));
+            }
+        });
+
+        // Extend the original startGame function
+        const originalStartGame = window.startGame;
+        window.startGame = function() {
+            originalStartGame();
+            // Display initial cards
+            const playerHand = document.getElementById("player");
+            const dealerHand = document.getElementById("dealer");
+            playerHand.innerHTML = '';
+            dealerHand.innerHTML = '';
+            
+            // Deal and display 2 cards to each player
+            for (let i = 0; i < 2; i++) {
+                const playerCard = dealCard("player");
+                const dealerCard = dealCard("dealer");
+                if (playerCard) displayCard(playerCard, playerHand);
+                if (dealerCard) displayCard(dealerCard, dealerHand);
+            }
+        };
+    </script>
+</body>
+</html>
