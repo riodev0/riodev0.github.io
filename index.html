@@ -371,6 +371,64 @@
                 margin-top: 0.5rem;
                 justify-content: center;
             }
+
+           
+        .sidebar {
+            width: 200px;
+            background-color: #0a3b22;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        
+        .sidebar-title {
+            color: #f8c537;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        
+        .game-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .game-item {
+            margin-bottom: 15px;
+        }
+        
+        .game-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1a7a4a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .game-btn:hover {
+            background-color: #0f5c36;
+            transform: translateX(5px);
+        }
+        
+        .game-btn i {
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 240px; /* sidebar width + padding */
+            flex: 1;
+            padding: 20px;
+        }
+        
         }
     </style>
 </head>
@@ -382,6 +440,52 @@
             <span id="balance">1000</span>
         </div>
     </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sidebar">
+        <div class="sidebar-title">
+            <i class="fas fa-gamepad"></i> Game Hub
+        </div>
+        <ul class="game-list">
+            <li class="game-item">
+                <button class="game-btn" id="blackjack-btn">
+                    <i class="fas fa-club"></i> Blackjack
+                </button>
+            </li>
+            <li class="game-item">
+                <button class="game-btn" id="ride-the-bus-btn">
+                    <i class="fas fa-bus"></i> Ride the Bus
+                </button>
+            </li>
+            <!-- Add more games here as you create them -->
+            <!-- <li class="game-item">
+                <button class="game-btn" id="new-game-btn">
+                    <i class="fas fa-dice"></i> New Game
+                </button>
+            </li> -->
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
     
     <div class="game-container">
         <div class="betting-panel">
@@ -408,9 +512,7 @@
                 <button id="rules-btn" class="btn btn-secondary">
                     <i class="fas fa-book"></i> Rules
                 </button>
-                <button id="ride-the-bus-btn" class="btn btn-secondary">
-                    <i class="fas fa-bus"></i> Ride the Bus
-                </button>
+                
             </div>
         </div>
 
@@ -482,7 +584,30 @@
             </button>
         </div>
     </div>
-
+  <script>
+        // Sidebar Navigation
+        document.addEventListener("DOMContentLoaded", () => {
+            const rideTheBusBtn = document.getElementById('ride-the-bus-btn');
+            const blackjackBtn = document.getElementById('blackjack-btn');
+            
+            // Current page highlight
+            blackjackBtn.style.backgroundColor = "#0f5c36";
+            blackjackBtn.style.fontWeight = "bold";
+            
+            // Navigation handlers
+            rideTheBusBtn.addEventListener('click', () => {
+                window.location.href = "https://riodev0.github.io/ridethebus/";
+            });
+            
+            blackjackBtn.addEventListener('click', () => {
+                // Already on Blackjack, could refresh if needed
+                window.location.href = "https://riodev0.github.io/";
+            });
+            
+            // Your existing Blackjack game JavaScript
+            // ...
+        });
+    </script>
     <script src="bj.js"></script>
 </body>
 </html>
