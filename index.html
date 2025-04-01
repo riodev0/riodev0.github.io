@@ -25,20 +25,93 @@
         }
         
         body {
+            display: flex;
             background-color: var(--primary);
             color: var(--white);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            width: 220px;
+            background-color: var(--dark-green);
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar-title {
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-green);
+        }
+        
+        .game-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .game-item {
+            margin-bottom: 12px;
+        }
+        
+        .game-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--light-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .game-btn:hover {
+            background-color: #0f5c36;
+            transform: translateX(5px);
+        }
+        
+        .game-btn.active {
+            background-color: var(--secondary);
+            color: var(--black);
+            font-weight: bold;
+        }
+        
+        .game-btn i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 220px;
+            padding: 20px;
+            max-width: calc(100% - 220px);
+        }
+        
+        /* Header adjustments */
         header {
             background-color: var(--dark-green);
             padding: 1rem;
             text-align: center;
             box-shadow: var(--shadow);
             position: relative;
+            width: 100%;
         }
         
         h1 {
@@ -343,6 +416,21 @@
         }
         
         @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+                padding: 15px;
+            }
+            
+            .main-content {
+                margin-left: 180px;
+                max-width: calc(100% - 180px);
+            }
+            
+            .game-btn {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            
             .chip-buttons {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -371,66 +459,28 @@
                 margin-top: 0.5rem;
                 justify-content: center;
             }
-
-           
-        .sidebar {
-            width: 200px;
-            background-color: #0a3b22;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-        
-        .sidebar-title {
-            color: #f8c537;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.2rem;
-        }
-        
-        .game-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .game-item {
-            margin-bottom: 15px;
-        }
-        
-        .game-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #1a7a4a;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .game-btn:hover {
-            background-color: #0f5c36;
-            transform: translateX(5px);
-        }
-        
-        .game-btn i {
-            margin-right: 10px;
-        }
-        
-        .main-content {
-            margin-left: 240px; /* sidebar width + padding */
-            flex: 1;
-            padding: 20px;
-        }
-        
         }
     </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-title">
+            <i class="fas fa-gamepad"></i> Game Hub
+        </div>
+        <ul class="game-list">
+            <li class="game-item">
+                <button class="game-btn active" id="blackjack-btn">
+                    <i class="fas fa-club"></i> Blackjack
+                </button>
+            </li>
+            <li class="game-item">
+                <button class="game-btn" id="ride-the-bus-btn">
+                    <i class="fas fa-bus"></i> Ride the Bus
+                </button>
+            </li>
+        </ul>
+    </div>
 </head>
 <body>
     <header>
@@ -455,29 +505,6 @@
 
 
 
-<div class="sidebar">
-        <div class="sidebar-title">
-            <i class="fas fa-gamepad"></i> Game Hub
-        </div>
-        <ul class="game-list">
-            <li class="game-item">
-                <button class="game-btn" id="blackjack-btn">
-                    <i class="fas fa-club"></i> Blackjack
-                </button>
-            </li>
-            <li class="game-item">
-                <button class="game-btn" id="ride-the-bus-btn">
-                    <i class="fas fa-bus"></i> Ride the Bus
-                </button>
-            </li>
-            <!-- Add more games here as you create them -->
-            <!-- <li class="game-item">
-                <button class="game-btn" id="new-game-btn">
-                    <i class="fas fa-dice"></i> New Game
-                </button>
-            </li> -->
-        </ul>
-    </div>
 
 
 
