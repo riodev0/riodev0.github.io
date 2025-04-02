@@ -436,11 +436,9 @@ function setupEventListeners() {
     });
 }
 // Add this with your other DOM elements
-const rideTheBusBtn = document.getElementById('ride-the-bus-btn');
+
 
 // Add this with your other event listeners
-rideTheBusBtn.addEventListener('click', () => {
-    window.location.href = "https://riodev0.github.io/ridethebus/";
-});
+
 // Initialize the game when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
