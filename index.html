@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0a5c36;
-            --secondary: #f8c537;
-            --dark-green: #0a3b22;
-            --light-green: #1a7a4a;
+            --primary: #00ffcc;
+            --primary-dark: #00cca3;
+            --secondary: #ff00aa;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #ffffff;
+            --gray: #333333;
+            --light-gray: #444444;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
             --red: #e74c3c;
             --black: #222;
             --white: #f9f9f9;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -26,41 +30,125 @@
         }
         
         body {
-            background-color: var(--primary);
-            color: var(--white);
+            background-color: var(--dark);
+            color: var(--light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
         }
         
-        header {
-            background-color: var(--dark-green);
-            padding: 1rem;
-            text-align: center;
-            box-shadow: var(--shadow);
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(30, 30, 30, 0.9);
+            border-bottom: 1px solid var(--gray);
             position: relative;
         }
         
-        h1 {
-            color: var(--secondary);
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
-        .balance-display {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: var(--secondary);
-            color: var(--black);
+        .balance {
+            background: var(--gray);
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 0.5rem;
+        }
+        
+        .account-btn {
+            background: var(--gray);
+            border: none;
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .account-btn:hover {
+            background: var(--light-gray);
+            transform: scale(1.05);
+        }
+        
+        .account-menu {
+            position: absolute;
+            top: 100%;
+            right: 2rem;
+            margin-top: 0.5rem;
+            background: var(--darker);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray);
+            padding: 1rem;
+            width: 250px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .account-menu.show {
+            display: block;
+        }
+        
+        .account-menu-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .account-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-weight: bold;
+        }
+        
+        .account-email {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            word-break: break-all;
+        }
+        
+        .account-menu-item {
+            padding: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .account-menu-item:hover {
+            background: var(--gray);
+        }
+        
+        .account-menu-item i {
+            width: 20px;
+            text-align: center;
         }
         
         .game-container {
@@ -73,13 +161,14 @@
         }
         
         .betting-panel {
-            background-color: var(--dark-green);
+            background-color: var(--darker);
             padding: 1.5rem;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
             gap: 1rem;
             box-shadow: var(--shadow);
+            border: 1px solid var(--gray);
         }
         
         .bet-controls {
@@ -120,7 +209,7 @@
         .chip-1000 { background-color: #FF0000; }
         
         .bet-display {
-            background-color: var(--light-green);
+            background-color: var(--gray);
             padding: 0.5rem 1rem;
             border-radius: 5px;
             font-size: 1.2rem;
@@ -157,7 +246,7 @@
         .hand {
             min-height: 180px;
             padding: 1rem;
-            background-color: var(--light-green);
+            background-color: var(--darker);
             border-radius: 10px;
             display: flex;
             flex-wrap: wrap;
@@ -165,6 +254,7 @@
             align-items: center;
             gap: 15px;
             box-shadow: var(--shadow);
+            border: 1px solid var(--gray);
         }
         
         .card {
@@ -249,7 +339,7 @@
         }
         
         .btn-primary {
-            background-color: var(--secondary);
+            background-color: var(--primary);
             color: var(--black);
         }
         
@@ -269,7 +359,7 @@
         }
         
         .message-panel {
-            background-color: var(--dark-green);
+            background-color: var(--darker);
             padding: 1rem;
             border-radius: 10px;
             text-align: center;
@@ -280,11 +370,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid var(--gray);
         }
         
         .win-message {
-            color: var(--secondary);
-            text-shadow: 0 0 5px rgba(248, 197, 55, 0.5);
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
         }
         
         .lose-message {
@@ -314,7 +405,7 @@
         }
         
         .modal-content {
-            background-color: var(--dark-green);
+            background-color: var(--darker);
             padding: 2rem;
             border-radius: 10px;
             max-width: 500px;
@@ -322,6 +413,7 @@
             text-align: center;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             position: relative;
+            border: 1px solid var(--gray);
         }
         
         .close-modal {
@@ -368,105 +460,39 @@
                 flex-wrap: wrap;
             }
             
-            .balance-display {
-                position: static;
-                transform: none;
-                margin-top: 0.5rem;
-                justify-content: center;
+            .account-menu {
+                right: 1rem;
             }
-
-           
-        .sidebar {
-            width: 200px;
-            background-color: #0a3b22;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-        
-        .sidebar-title {
-            color: #f8c537;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.2rem;
-        }
-        
-        .game-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .game-item {
-            margin-bottom: 15px;
-        }
-        
-        .game-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #1a7a4a;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .game-btn:hover {
-            background-color: #0f5c36;
-            transform: translateX(5px);
-        }
-        
-        .game-btn i {
-            margin-right: 10px;
-        }
-        
-        .main-content {
-            margin-left: 240px; /* sidebar width + padding */
-            flex: 1;
-            padding: 20px;
-        }
-        
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Blackjack</h1>
-        <div class="balance-display">
+    <nav class="nav">
+        <div class="logo">TATE'S BLACKJACK</div>
+        <div class="balance">
             <i class="fas fa-coins"></i>
-            <span id="balance">10000</span>
+            <span id="balance">0</span>
         </div>
-    </header>
+        <button class="account-btn" id="account-btn">
+            <i class="fas fa-user"></i>
+        </button>
+        
+        <div class="account-menu" id="account-menu">
+            <div class="account-menu-header">
+                <div class="account-avatar" id="user-avatar">T</div>
+                <div class="account-email" id="account-email">user@example.com</div>
+            </div>
+            <div class="account-menu-item" id="referral-btn">
+                <i class="fas fa-gift"></i>
+                <span>Referral Program</span>
+            </div>
+            <div class="account-menu-item" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="game-container">
         <div class="betting-panel">
             <h2>Place Your Bet</h2>
@@ -499,19 +525,6 @@
                 </button>
             </div>
         </div>
-
-
-
-<script>
-    // Add with your other JavaScript
-    document.getElementById('home-btn').addEventListener('click', () => {
-        window.location.href = "https://riodev0.github.io/home";
-    });
-</script>
-
-
-
-
         
         <div class="game-board">
             <div class="hand-container">
@@ -573,30 +586,493 @@
             </button>
         </div>
     </div>
-  <script>
-        // Sidebar Navigation
-        document.addEventListener("DOMContentLoaded", () => {
-            const rideTheBusBtn = document.getElementById('ride-the-bus-btn');
-            const blackjackBtn = document.getElementById('blackjack-btn');
+
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDfK_HayFBawYzgIcGXQsQ4ynyCrVHHL8A",
+            authDomain: "tbgames-d6995.firebaseapp.com",
+            projectId: "tbgames-d6995",
+            storageBucket: "tbgames-d6995.appspot.com",
+            messagingSenderId: "578117532273",
+            appId: "1:578117532273:web:3e52426b147f1c7e5af9d0",
+            measurementId: "G-VWLDSR92KV"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Game State
+        let currentUser = null;
+        let userData = null;
+        let currentBet = 0;
+        let gameState = {
+            deck: [],
+            dealerHand: [],
+            playerHand: [],
+            gameActive: false,
+            doubled: false
+        };
+
+        // DOM Elements
+        const balanceEl = document.getElementById('balance');
+        const currentBetEl = document.getElementById('current-bet');
+        const dealerHandEl = document.getElementById('dealer');
+        const playerHandEl = document.getElementById('player');
+        const dealerScoreEl = document.getElementById('dealer-score');
+        const playerScoreEl = document.getElementById('player-score');
+        const messageEl = document.getElementById('message');
+        const dealBtn = document.getElementById('deal-btn');
+        const hitBtn = document.getElementById('hit-btn');
+        const standBtn = document.getElementById('stand-btn');
+        const doubleBtn = document.getElementById('double-btn');
+        const clearBetBtn = document.getElementById('clear-bet');
+        const rulesBtn = document.getElementById('rules-btn');
+        const homeBtn = document.getElementById('home-btn');
+        const closeRulesBtn = document.getElementById('close-rules');
+        const newGameBtn = document.getElementById('new-game-btn');
+        const actionButtons = document.getElementById('action-buttons');
+        const chipButtons = document.querySelectorAll('.chip');
+        const rulesModal = document.getElementById('rules-modal');
+        const resultModal = document.getElementById('result-modal');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+        const resultPayout = document.getElementById('result-payout');
+        const accountBtn = document.getElementById('account-btn');
+        const accountMenu = document.getElementById('account-menu');
+        const accountEmailEl = document.getElementById('account-email');
+        const userAvatarEl = document.getElementById('user-avatar');
+        const logoutBtn = document.getElementById('logout-btn');
+        const referralBtn = document.getElementById('referral-btn');
+
+        // Format money with abbreviation
+        function formatMoney(value) {
+            if (value >= 1000000000) return (value/1000000000).toFixed(1) + 'B';
+            if (value >= 1000000) return (value/1000000).toFixed(1) + 'M';
+            if (value >= 1000) return (value/1000).toFixed(1) + 'k';
+            return value.toFixed(0);
+        }
+
+        // Initialize a new deck of cards
+        function createDeck() {
+            const suits = ['♠', '♣', '♥', '♦'];
+            const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+            const deck = [];
             
-            // Current page highlight
-            blackjackBtn.style.backgroundColor = "#0f5c36";
-            blackjackBtn.style.fontWeight = "bold";
+            for (let suit of suits) {
+                for (let value of values) {
+                    deck.push({ suit, value });
+                }
+            }
             
-            // Navigation handlers
-            rideTheBusBtn.addEventListener('click', () => {
-                window.location.href = "https://riodev0.github.io/ridethebus/";
+            return shuffleDeck(deck);
+        }
+
+        // Shuffle the deck
+        function shuffleDeck(deck) {
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+            return deck;
+        }
+
+        // Calculate the score of a hand
+        function calculateScore(hand) {
+            let score = 0;
+            let aces = 0;
+            
+            for (let card of hand) {
+                if (card.value === 'A') {
+                    aces++;
+                    score += 11;
+                } else if (['K', 'Q', 'J'].includes(card.value)) {
+                    score += 10;
+                } else {
+                    score += parseInt(card.value);
+                }
+            }
+            
+            while (score > 21 && aces > 0) {
+                score -= 10;
+                aces--;
+            }
+            
+            return score;
+        }
+
+        // Create a card element
+        function createCardElement(card, hidden = false) {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'card';
+            
+            if (hidden) {
+                cardEl.classList.add('card-back');
+                return cardEl;
+            }
+            
+            const isRed = card.suit === '♥' || card.suit === '♦';
+            cardEl.classList.add(isRed ? 'red' : 'black');
+            
+            const valueEl = document.createElement('div');
+            valueEl.className = 'card-value';
+            valueEl.textContent = card.value;
+            
+            const suitEl = document.createElement('div');
+            suitEl.className = 'card-suit';
+            suitEl.textContent = card.suit;
+            
+            cardEl.appendChild(valueEl);
+            cardEl.appendChild(suitEl);
+            
+            return cardEl;
+        }
+
+        // Update the displayed hands
+        function updateHands(dealerHidden = true) {
+            dealerHandEl.innerHTML = '';
+            playerHandEl.innerHTML = '';
+            
+            // Dealer's hand
+            gameState.dealerHand.forEach((card, index) => {
+                const hidden = index === 0 && dealerHidden && gameState.gameActive;
+                dealerHandEl.appendChild(createCardElement(card, hidden));
             });
             
-            blackjackBtn.addEventListener('click', () => {
-                // Already on Blackjack, could refresh if needed
-                window.location.href = "https://riodev0.github.io/";
+            // Player's hand
+            gameState.playerHand.forEach(card => {
+                playerHandEl.appendChild(createCardElement(card));
             });
             
-            // Your existing Blackjack game JavaScript
-            // ...
+            // Update scores
+            const dealerScore = dealerHidden && gameState.gameActive ? 
+                calculateScore([gameState.dealerHand[1]]) : 
+                calculateScore(gameState.dealerHand);
+                
+            const playerScore = calculateScore(gameState.playerHand);
+            
+            dealerScoreEl.textContent = dealerScore;
+            playerScoreEl.textContent = playerScore;
+            
+            return { dealerScore, playerScore };
+        }
+
+        // Deal initial cards
+        function dealInitialCards() {
+            gameState.deck = createDeck();
+            gameState.dealerHand = [gameState.deck.pop(), gameState.deck.pop()];
+            gameState.playerHand = [gameState.deck.pop(), gameState.deck.pop()];
+            gameState.gameActive = true;
+            gameState.doubled = false;
+            
+            updateHands();
+            
+            // Check for blackjack
+            const playerScore = calculateScore(gameState.playerHand);
+            if (playerScore === 21) {
+                setTimeout(() => stand(), 1000);
+            }
+        }
+
+        // Player hits
+        function hit() {
+            if (!gameState.gameActive) return;
+            
+            gameState.playerHand.push(gameState.deck.pop());
+            const { playerScore } = updateHands();
+            
+            if (playerScore > 21) {
+                endGame(false);
+            }
+            
+            // Disable double after first move
+            doubleBtn.disabled = true;
+        }
+
+        // Player stands
+        function stand() {
+            if (!gameState.gameActive) return;
+            
+            gameState.gameActive = false;
+            updateHands(false);
+            
+            // Dealer draws until 17 or higher
+            let dealerScore = calculateScore(gameState.dealerHand);
+            while (dealerScore < 17) {
+                gameState.dealerHand.push(gameState.deck.pop());
+                dealerScore = calculateScore(gameState.dealerHand);
+                updateHands(false);
+            }
+            
+            // Determine winner
+            const playerScore = calculateScore(gameState.playerHand);
+            
+            if (playerScore > 21) {
+                endGame(false);
+            } else if (dealerScore > 21) {
+                endGame(true);
+            } else if (playerScore > dealerScore) {
+                endGame(true);
+            } else if (playerScore < dealerScore) {
+                endGame(false);
+            } else {
+                endGame(null); // Push
+            }
+        }
+
+        // Player doubles down
+        function double() {
+            if (!gameState.gameActive || gameState.doubled) return;
+            
+            // Double the bet
+            currentBet *= 2;
+            currentBetEl.textContent = currentBet;
+            gameState.doubled = true;
+            
+            // Hit once and stand
+            hit();
+            if (gameState.gameActive) {
+                stand();
+            }
+        }
+
+        // End the game
+        async function endGame(playerWins) {
+            gameState.gameActive = false;
+            actionButtons.style.display = 'none';
+            
+            const playerScore = calculateScore(gameState.playerHand);
+            const dealerScore = calculateScore(gameState.dealerHand);
+            
+            let payout = 0;
+            let message = '';
+            
+            if (playerWins === null) {
+                message = 'Push! Your bet is returned';
+                payout = currentBet;
+            } else if (playerWins) {
+                if (playerScore === 21 && gameState.playerHand.length === 2) {
+                    // Blackjack pays 3:2
+                    payout = currentBet * 2.5;
+                    message = 'Blackjack! You win ' + (payout - currentBet).toFixed(2);
+                } else {
+                    // Standard win pays 1:1
+                    payout = currentBet * 2;
+                    message = 'You win ' + (payout - currentBet).toFixed(2);
+                }
+            } else {
+                message = 'You lose ' + currentBet.toFixed(2);
+                payout = 0;
+            }
+            
+            // Update balance
+            if (payout > 0) {
+                try {
+                    await db.runTransaction(async (transaction) => {
+                        const userRef = db.collection('users').doc(currentUser.uid);
+                        const doc = await transaction.get(userRef);
+                        
+                        if (!doc.exists) throw "Document does not exist!";
+                        
+                        const currentBalance = doc.data().balance || 0;
+                        const newBalance = currentBalance + (payout - currentBet);
+                        transaction.update(userRef, { balance: newBalance });
+                    });
+                    
+                    // Update local balance
+                    userData.balance += (payout - currentBet);
+                    balanceEl.textContent = formatMoney(userData.balance);
+                    
+                    // Save game result
+                    await db.collection('blackjack_games').add({
+                        bet: currentBet,
+                        payout: payout,
+                        result: playerWins ? "win" : (playerWins === null ? "push" : "loss"),
+                        playerScore: playerScore,
+                        dealerScore: dealerScore,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        userId: currentUser.uid
+                    });
+                } catch (error) {
+                    console.error("Error updating balance:", error);
+                }
+            }
+            
+            // Show result modal
+            resultTitle.textContent = playerWins ? 'You Win!' : (playerWins === null ? 'Push!' : 'You Lose');
+            resultMessage.textContent = message;
+            resultPayout.textContent = `Payout: $${payout.toFixed(2)}`;
+            resultModal.classList.add('show');
+        }
+
+        // Start a new game
+        function newGame() {
+            resultModal.classList.remove('show');
+            currentBet = 0;
+            currentBetEl.textContent = currentBet;
+            dealBtn.disabled = true;
+            
+            dealerHandEl.innerHTML = '';
+            playerHandEl.innerHTML = '';
+            dealerScoreEl.textContent = '0';
+            playerScoreEl.textContent = '0';
+            messageEl.textContent = '';
+            
+            gameState = {
+                deck: [],
+                dealerHand: [],
+                playerHand: [],
+                gameActive: false,
+                doubled: false
+            };
+        }
+
+        // Auth State Listener
+        auth.onAuthStateChanged(async user => {
+            if (!user) {
+                window.location.href = 'https://riodev0.github.io/login';
+                return;
+            }
+            
+            currentUser = user;
+            await loadUserData();
+            
+            // Update account menu
+            const username = user.email.split('@')[0];
+            accountEmailEl.textContent = user.email;
+            userAvatarEl.textContent = username.charAt(0).toUpperCase();
+            
+            // Setup event listeners
+            setupEventListeners();
         });
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const doc = await db.collection('users').doc(currentUser.uid).get();
+                if (doc.exists) {
+                    userData = doc.data();
+                    balanceEl.textContent = formatMoney(userData.balance || 0);
+                    
+                    // Set up real-time listener for balance updates
+                    db.collection('users').doc(currentUser.uid).onSnapshot((doc) => {
+                        if (doc.exists) {
+                            const updatedData = doc.data();
+                            userData.balance = updatedData.balance || 0;
+                            balanceEl.textContent = formatMoney(userData.balance);
+                        }
+                    }, (error) => console.error("Snapshot error:", error));
+                } else {
+                    // Create new user data
+                    const initialBalance = 1000;
+                    await db.collection('users').doc(currentUser.uid).set({
+                        balance: initialBalance,
+                        email: currentUser.email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    userData = { balance: initialBalance };
+                    balanceEl.textContent = formatMoney(initialBalance);
+                }
+            } catch (error) {
+                console.error("Error loading user data:", error);
+                alert('Error loading balance - please refresh!');
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Chip buttons
+            chipButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const value = parseInt(btn.dataset.value);
+                    currentBet += value;
+                    
+                    // Ensure bet doesn't exceed balance
+                    if (currentBet > userData.balance) {
+                        currentBet = userData.balance;
+                    }
+                    
+                    currentBetEl.textContent = currentBet;
+                    dealBtn.disabled = currentBet <= 0;
+                });
+            });
+            
+            // Clear bet button
+            clearBetBtn.addEventListener('click', () => {
+                currentBet = 0;
+                currentBetEl.textContent = currentBet;
+                dealBtn.disabled = true;
+            });
+            
+            // Deal button
+            dealBtn.addEventListener('click', () => {
+                if (currentBet <= 0 || currentBet > userData.balance) return;
+                
+                dealInitialCards();
+                actionButtons.style.display = 'flex';
+                doubleBtn.disabled = false;
+            });
+            
+            // Action buttons
+            hitBtn.addEventListener('click', hit);
+            standBtn.addEventListener('click', stand);
+            doubleBtn.addEventListener('click', double);
+            
+            // Rules button
+            rulesBtn.addEventListener('click', () => {
+                rulesModal.classList.add('show');
+            });
+            
+            // Close rules button
+            closeRulesBtn.addEventListener('click', () => {
+                rulesModal.classList.remove('show');
+            });
+            
+            // New game button
+            newGameBtn.addEventListener('click', newGame);
+            
+            // Home button
+            homeBtn.addEventListener('click', () => {
+                window.location.href = "https://riodev0.github.io/home";
+            });
+            
+            // Close modals when clicking outside
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('show');
+                }
+            });
+            
+            // Account menu toggle
+            accountBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                accountMenu.classList.toggle('show');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!accountMenu.contains(e.target) && e.target !== accountBtn) {
+                    accountMenu.classList.remove('show');
+                }
+            });
+            
+            // Logout button
+            logoutBtn.addEventListener('click', () => {
+                auth.signOut().then(() => {
+                    window.location.href = 'https://riodev0.github.io/login';
+                });
+            });
+            
+            // Referral button
+            referralBtn.addEventListener('click', () => {
+                alert('Referral program coming soon!');
+            });
+        }
     </script>
-    <script src="bj.js"></script>
 </body>
 </html>
